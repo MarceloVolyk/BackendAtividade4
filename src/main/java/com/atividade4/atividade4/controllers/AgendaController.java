@@ -45,9 +45,4 @@ public class AgendaController {
         return new ResponseEntity<>(agendaService.criarAgenda(agendaDTO), HttpStatus.CREATED);
     }
 
-    // Endpoint para obter professores habilitados e disponíveis
-    @PostMapping("/professores-disponiveis")
-    public ResponseEntity<List<Professor>> obterProfessoresDisponiveis(@RequestBody ProfessoresHabilitadosRequestDTO requestDTO) {
-        return ResponseEntity.ok(agendaService.obterProfessoresHabilitadosDisponiveis(requestDTO));
-    }
 }
