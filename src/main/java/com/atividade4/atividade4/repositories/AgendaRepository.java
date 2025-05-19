@@ -9,14 +9,12 @@ import org.springframework.data.repository.query.Param;
 
 import com.atividade4.atividade4.entities.Agenda;
 
-public interface AgendaRepository extends JpaRepository<Agenda,Long>{
+public interface AgendaRepository extends JpaRepository<Agenda, Long> {
 
 	List<Agenda> findByProfessorId(Long professorId);
-	
-	@Query("SELECT COUNT(a) > 0 FROM Agenda a WHERE a.professor.id = :professorId " +
-	           "AND ((a.dataInicio <= :dataFim AND a.dataFim >= :dataInicio))")
-	    boolean existsAgendamentoConflitante(
-	            @Param("professorId") Long professorId,
-	            @Param("dataInicio") LocalDate dataInicio,
-	            @Param("dataFim") LocalDate dataFim);
+
+	@Query("SELECT COUNT(a) > 0 FROM Agenda a WHERE a.professor.id = :professorId "
+			+ "AND ((a.dataInicio <= :dataFim AND a.dataFim >= :dataInicio))")
+	boolean existsAgendamentoConflitante(@Param("professorId") Long professorId,
+			@Param("dataInicio") LocalDate dataInicio, @Param("dataFim") LocalDate dataFim);
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.atividade4.atividade4.dtos.AgendaDTO;
 import com.atividade4.atividade4.dtos.AgendaResponseDTO;
@@ -18,6 +20,8 @@ import com.atividade4.atividade4.dtos.ProfessoresHabilitadosRequestDTO;
 import com.atividade4.atividade4.entities.Professor;
 import com.atividade4.atividade4.services.AgendaServiceImpl;
 
+@RestController
+@RequestMapping("/agendas")
 public class AgendaController {
 
 	@Autowired
@@ -39,19 +43,6 @@ public class AgendaController {
     @PostMapping
     public ResponseEntity<AgendaResponseDTO> criarAgenda(@RequestBody AgendaDTO agendaDTO) {
         return new ResponseEntity<>(agendaService.criarAgenda(agendaDTO), HttpStatus.CREATED);
-    }
-
-    // Atualizar uma agenda existente
-    @PutMapping("/{id}")
-    public ResponseEntity<AgendaResponseDTO> atualizarAgenda(@PathVariable Long id, @RequestBody AgendaDTO agendaDTO) {
-        return ResponseEntity.ok(agendaService.atualizarAgenda(id, agendaDTO));
-    }
-
-    // Excluir uma agenda
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirAgenda(@PathVariable Long id) {
-        agendaService.excluirAgenda(id);
-        return ResponseEntity.noContent().build();
     }
 
     // Endpoint para obter professores habilitados e disponíveis
